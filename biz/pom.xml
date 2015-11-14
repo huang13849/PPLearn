@@ -10,7 +10,6 @@
 	</parent>
 	<artifactId>pplearn-biz</artifactId>
 	<name>pplearn-biz</name>
-	<version>1.0-SNAPSHOT</version>
 	<properties>
 	</properties>
 	<dependencies>		
