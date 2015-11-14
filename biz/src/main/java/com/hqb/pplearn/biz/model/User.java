@@ -22,6 +22,7 @@ public class User extends AbstractEntity{
     private String offer;
     private String want;
     private String introduce;
+    private String rongCloudToken;
     
 	public String getEmail() {
 		return email;
@@ -83,5 +84,10 @@ public class User extends AbstractEntity{
 	public void setWant(String want) {
 		this.want = want;
 	}
-	
+	public String getRongCloudToken() {
+		return rongCloudToken;
+	}
+	public void setRongCloudToken(String rongCloudToken) {
+		this.rongCloudToken = rongCloudToken;
+	}
 }

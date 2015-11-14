@@ -11,7 +11,7 @@
         //强制使用localstorage存储用户标识
         //      window.FORCE_LOCAL_STORAGE = true
     </script>
-    <script src="assets/js/RongIMClient-0.9.10.min.js"></script>
+    <script src="http://res.websdk.rongcloud.cn/RongIMClient-0.9.10.min.js"></script>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
     content:<input id="content" type="text" style="width: 80%;" value="1">
 </div>
 <div style="margin: 10px 10px">
-    send to:<input type="text" id="target" style="margin-right: 50px" value="TARGETID">
+    send to:<input type="hidden" id="target" style="margin-right: 50px" value="${toUser.id!}">
     <button id="send">send</button>
 </div>
 
@@ -65,7 +65,7 @@
         ins = RongIMClient.getInstance();
         var c = document.getElementById("content"), to = document.getElementById("target"), s = document.getElementById("send"), t = document.getElementById("type");
         s.onclick = function () {
-            var con = RongIMClient.ConversationType.setValue(t.value);
+            var con = RongIMClient.ConversationType.setValue("4");
             ins.sendMessage(con, to.value, RongIMClient.TextMessage.obtain(c.value || Date.now()), null, {
                 onSuccess: function () {
                     console.log("send successfully");

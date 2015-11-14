@@ -46,4 +46,9 @@ public class UserService {
 			throw new RuntimeException("User id[" + email + "] haven't registered.Please register first.");
 		}
 	}
+
+	@Transactional
+	public void update(User user) {
+		userRepository.save(user);
+    }
  }

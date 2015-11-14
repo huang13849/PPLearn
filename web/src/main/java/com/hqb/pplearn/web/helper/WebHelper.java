@@ -31,6 +31,7 @@ import com.hqb.pplearn.common.util.excel.ExcelUtil;
 
 public class WebHelper {
 
+	private static final String SESSION_KEY_LOGIN_USER = "loginUser";
 	private static final Logger LOG = LoggerFactory.getLogger(WebHelper.class);
 	private static final int BUFFER_SIZE = 4096;
 
@@ -240,8 +241,25 @@ public class WebHelper {
 		return errMsgBuilder.toString();
 	}
 
-	public static void putUserIntoSession(HttpServletRequest request, User loginUser) {
-	    HttpSession session = request.getSession(true);
-	    session.setAttribute("loginUser", loginUser);
-    }
+	public static void saveCurrentUserToSeesion(HttpServletRequest request, User loginUser) {
+		HttpSession session = request.getSession(true);
+		session.setAttribute(SESSION_KEY_LOGIN_USER, loginUser);
+	}
+
+	public static void removeCurrentUserFromSeesion(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			// session.invalidate();
+			session.removeAttribute(SESSION_KEY_LOGIN_USER);
+		}
+	}
+
+	public static User getCurrentUserFromSession(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			return (User) session.getAttribute(SESSION_KEY_LOGIN_USER);
+		} else {
+			return null;
+		}
+	}
 }

@@ -69,6 +69,10 @@ public class RongCloudService {
 	}
 
 	private String getTokenFromRongClound(String userId, String name, String portraitUri) {
+		String imgUrl = portraitUri;
+		if(StringUtils.isBlank(imgUrl)){
+			imgUrl = "http://pic.nipic.com/2007-07-10/2007710195217800_2.jpg";
+		}
 		StringBuilder retSb = null;
 		HttpURLConnection conn = null;
 		try {
@@ -85,7 +89,7 @@ public class RongCloudService {
 			StringBuilder sb = new StringBuilder("userId=");
 			sb.append(URLEncoder.encode(userId, "UTF-8"));
 			sb.append("&name=").append(URLEncoder.encode(name, "UTF-8"));
-			sb.append("&portraitUri=").append(URLEncoder.encode(portraitUri, "UTF-8"));
+			sb.append("&portraitUri=").append(URLEncoder.encode(imgUrl, "UTF-8"));
 
 			OutputStream out = conn.getOutputStream();
 			out.write(sb.toString().getBytes("UTF-8"));
@@ -167,7 +171,7 @@ public class RongCloudService {
 		testRongCloudTokenCaseOne();
 	}
 
-	//@SuppressWarnings("unused")
+	// @SuppressWarnings("unused")
 	private static void testRongCloudTokenCaseOne() {
 		RongCloudService service = new RongCloudService();
 		service.setAppKey("82hegw5uh00ax");
@@ -177,7 +181,7 @@ public class RongCloudService {
 	}
 
 	@SuppressWarnings("unused")
-    private static void testRongCloudTokenCaseTwo() {
+	private static void testRongCloudTokenCaseTwo() {
 		RongCloudService service = new RongCloudService();
 		service.setAppKey("pwe86ga5ereq6");
 		service.setAppSecret("D97fj2PhruDc");
