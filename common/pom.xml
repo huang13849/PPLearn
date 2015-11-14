@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hqb.pplearn</groupId>
+		<artifactId>pplearn</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<packaging>jar</packaging>
+	<artifactId>pplearn-common</artifactId>
+	<name>pplearn-common</name>
+	<properties>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<pplearn.version>1.0-SNAPSHOT</pplearn.version>
+		<org.springframework-version>4.0.0.RELEASE</org.springframework-version>
+		<org.aspectj-version>1.7.4</org.aspectj-version>
+		<org.slf4j-version>1.6.1</org.slf4j-version>
+		<jpa.version>2.0.0</jpa.version>
+		<hibernate.version>4.1.4.Final</hibernate.version>
+		<spring.integration.version>4.0.0.RELEASE</spring.integration.version>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+
+	</properties>
+
+	<dependencies>
+	    <dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+	    <dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+	        <groupId>org.hibernate</groupId>
+	        <artifactId>hibernate-annotations</artifactId>
+	        <version>3.5.6-Final</version>
+        </dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.10-FINAL</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2.3</version>
+		</dependency>
+	</dependencies>
+</project>
