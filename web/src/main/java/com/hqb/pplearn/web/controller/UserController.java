@@ -78,8 +78,7 @@ public class UserController {
 		User loginUser = userService.findUserByEmail(userId);
 		if(loginUser != null && password.equals(loginUser.getPassword())) {
 			logger.info("User[" + loginUser.getEmail() + "] logged in.");
-			HttpSession session = request.getSession(true);
-			session.setAttribute("loginUser", loginUser);
+			putUserIntoSession(request, loginUser);
 			nextPage = "matchPage";
 		} else {
 			logger.info("Invaid user id[" + loginUser.getEmail() + "]");
@@ -87,4 +86,9 @@ public class UserController {
 		}
 		return nextPage;
 	}
+
+	private void putUserIntoSession(HttpServletRequest request, User loginUser) {
+	    HttpSession session = request.getSession(true);
+	    session.setAttribute("loginUser", loginUser);
+    }
 }

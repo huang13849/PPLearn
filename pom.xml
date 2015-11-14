@@ -187,6 +187,7 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>1.4.3.RELEASE</version>
 		</dependency>
+		<!--  -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
@@ -197,6 +198,7 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>

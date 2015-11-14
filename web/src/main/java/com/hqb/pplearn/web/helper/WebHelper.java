@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -25,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
+import com.hqb.pplearn.biz.model.User;
 import com.hqb.pplearn.common.util.excel.ExcelUtil;
 
 public class WebHelper {
@@ -237,4 +239,9 @@ public class WebHelper {
 		}
 		return errMsgBuilder.toString();
 	}
+
+	public static void putUserIntoSession(HttpServletRequest request, User loginUser) {
+	    HttpSession session = request.getSession(true);
+	    session.setAttribute("loginUser", loginUser);
+    }
 }
