@@ -26,27 +26,6 @@
 	</properties>
 
 	<dependencies>
-<<<<<<< HEAD
-
-=======
-		<!-- 
-	    <dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.0.Final</version>
-		</dependency>
-	    <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
-		<dependency>
-	        <groupId>org.hibernate</groupId>
-	        <artifactId>hibernate-annotations</artifactId>
-	        <version>3.5.6-Final</version>
-        </dependency>
-		 -->
->>>>>>> bbc56709d92407652b87782cf120643dabb48410
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
