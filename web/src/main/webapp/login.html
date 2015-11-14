@@ -1,0 +1,163 @@
+<#include "webapp/header.html">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+我的首页 
+</title>
+<!-- ########################TODO:表头部分内容（CSS,title,keywords,description）可以考虑实现动态加载，目前支持3套模板  ############################ -->
+<link rel="shortcut icon" href="${base}/resbase/sites/whaty/public/themes/weibo/favicon.ico" />
+<meta name="keywords" content="WhatySNS|SNS" />
+<meta name="description" content="WhatySNS|SNS|Sociax" />
+<script> 
+	var _UID_   = '${(currentSsoUser.id)!""}';   //用户ID
+	var _SITEID_   = '${(currentSsoUser.fkSiteId)!""}';   //站点ID
+	var _MID_   = '4';
+	var _ROOT_  = '${base}';
+	var _THEME_ = '${_THEME_}';
+	var _PUBLIC_ = '${base}/resbase/sites/whaty/public';
+</script>
+<!-- 全局风格CSS -->
+<!-- TODO:根据网站页面风格加载页面样式 ：classic、classic2、weibo-->
+<link href="${_THEME_}/main.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resbase/sites/whaty/public/js/tbox/box.css" rel="stylesheet" type="text/css" />
+<!-- 编辑器样式文件 -->
+<link href="${base}/resbase/sites/whaty/public/js/editor/editor/theme/base-min.css" rel="stylesheet"/>
+<!--[if lt IE 8]>
+<link href="${base}/resbase/sites/whaty/public/js/editor/editor/theme/cool/editor-pkg-sprite-min.css" rel="stylesheet"/>
+<![endif]-->
+<!--[if gte IE 8]><!-->
+<link href="${base}/resbase/sites/whaty/public/js/editor/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
+<!--<![endif]-->
+<!-- 核心JS加载 -->
+<script src="${base}/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${base}/resbase/sites/whaty/public/js/common.js"></script>
+<script type="text/javascript" src="${base}/resbase/sites/whaty/public/js/tbox/box.js"></script>
+<script type="text/javascript" src="${base}/resbase/sites/whaty/public/js/scrolltopcontrol.js"></script>
+<script type="text/javascript" src="${base}/resbase/sites/whaty/public/js/jquery.jgrow.min.js"></script>
+<!-- 运行时JS库  重点请参考weibo.js -->
+<script type="text/javascript" src="${base}/resbase/sites/whaty/public/js/weibo.js"></script>
+<script type="text/javascript" src="${base}/resbase/sites/whaty/public/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="${base}/js/jquery.form.js"></script>
+<script src="${base}/js/validate/jquery.validate.js" type="text/javascript"></script>
+<script src="${base}/js/validate/messages_cn.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	var options = { 
+        url: "${base}/sso/login_platformLogin.action",  //action提交路径
+        type: "post",        // 'get' or 'post', override for form's 'method' attribute 
+        success: showResponse,  // 提交成功后回调函数 
+        error:showError,
+        beforeSubmit:validateForm  // 提交前回调函数
+    }; 
+    $('#loginForm').ajaxForm(options);  //将AjaxForm绑定到loginForm中
+});
+function validateForm(){
+	var loginId = $("#loginId").val();
+	var password = $("#password").val();
+
+	
+	if(loginId == ""){
+		ui.error("请填写用户名!");
+		$("#loginId").focus();
+		return false;
+	}
+	if(password == ""){
+		ui.error("请填写密码!");
+		$("#password").focus();
+		return false;
+	}
+
+	return true;
+}
+
+function showResponse(data){
+	if(data =='success'){
+		window.location.href="${base}/sso/login_toMain.action";
+	}else{
+		alert(data);
+	}
+}
+function showError(){
+	alert('error!');
+}
+</script>
+<style type="text/css">
+.reg_box,.form_li{
+	padding-left:250px;
+}
+.btn_green_w121{
+	cursor:pointer;
+}
+</style>
+</head>
+<body class="body_bg">
+<div class="div_body">
+<!-- 头部 begin -->
+<div class="header_bg">
+    <div class="header">
+      <div class="logo" style="height:60px;"><a href="#">&nbsp;</a></div>
+      <!-- 
+      <div id="indt" class="nav_sub br3">
+        <p>
+        
+      	<a href="{:U('home/Square')}">微博广场</a>&nbsp;|&nbsp;
+      	<a href="{:U('home/Public/register')}">注册</a>&nbsp;|&nbsp;
+      	<a href="{:U('home/Public/login')}">登录</a>
+        <p>
+      </div>
+      -->
+  </div>
+</div>
+<!-- 头部 end -->
+<div class="content"><!-- 内容 begin  -->
+  <div class="main no_l">
+    <div class="mainbox" style="background:#fff;">
+      
+      <div class="mainbox_C" style="border-right:1px solid #FFF;">
+        <div class="reg_box">
+		<div class="left" style="width:100%;padding-left:150px;">
+		  <h2 class="cBlue"><strong>用户登录</strong></h2>
+		</div>
+          <form id="loginForm" method="post" action="loginPage.action">
+            <ul class="form_list">
+              <li class="form_li">
+                <div class="reg_li_1">用户名：</div>
+                <div class="reg_li_2">
+                  <input type="text" class="text35" style="width:250px;" type="text" id="loginId" name="ssoUser.loginId" value=""/>
+                </div>
+              </li>
+              <li class="form_li">
+                <div class="reg_li_1">密&nbsp;&nbsp;&nbsp;&nbsp;码：</div>
+                <div class="reg_li_2">
+                  <input type="password" class="text35" style="width:250px;" type="password" id="password" name="ssoUser.password" value=""/>
+                </div>
+              </li>
+
+              
+              <!-- 
+              <li class="form_li">
+                <div class="reg_li_1">验证码：</div>
+                <div class="reg_li_2">
+                  <input type="text" class="text35" style="width:100px;" name="verify" require="true" value="" datatype="require"  msg="验证码不能为空"/>
+                  <a href="javascript:void(0);" onclick="changeverify()"><img src="XXX" id="verifyimg" alt="换一张" /></a> </div>
+              </li>
+               -->
+              <li class="form_li">
+                <div class="reg_li_1">&nbsp;</div>
+                <div class="reg_li_2"> 
+				<input type="submit" class="btn_green_w121" value="Submit">
+				<input type="reset" class="btn_green_w121" value="Reset">
+                </div>
+              </li>
+            </ul>
+          </form>
+        </div>
+        <div class="c"></div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<#include "webapp/footer.html">
