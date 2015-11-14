@@ -39,6 +39,11 @@ public class UserService {
 	}
 	
 	public User findUserByEmail(String email) {
-		return userRepository.findByEmail(email).get(0);
+		List<User> users = userRepository.findByEmail(email);
+		if (CollectionUtils.isNotEmpty(users)) {
+			return users.get(0);
+		} else {
+			throw new RuntimeException("User id[" + email + "] haven't registered.Please register first.");
+		}
 	}
  }
