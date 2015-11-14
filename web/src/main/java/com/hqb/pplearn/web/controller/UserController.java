@@ -68,7 +68,7 @@ public class UserController {
 	@RequestMapping(value = "/loginPage.jhtm", method = RequestMethod.GET)
 	public String loginPage() {
 		logger.info("request registerPage.jhtm");
-		return "login";
+		return "signIn";
 	}
 	
 	@RequestMapping(value = "/login.jhtm", method =RequestMethod.POST)
@@ -83,7 +83,7 @@ public class UserController {
 			nextPage = "matchPage";
 		} else {
 			logger.info("Invaid user id[" + loginUser.getEmail() + "]");
-			nextPage = "loginPage";
+			nextPage = "signIn";
 		}
 		return nextPage;
 	}
