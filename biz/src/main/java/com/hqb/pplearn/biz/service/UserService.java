@@ -37,4 +37,8 @@ public class UserService {
 		List<User> users = userRepository.findByEmail(email);
 		return CollectionUtils.isNotEmpty(users);
 	}
-}
+	
+	public User findUserByEmail(String email) {
+		return userRepository.findByEmail(email).get(0);
+	}
+ }

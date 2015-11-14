@@ -3,6 +3,7 @@ package com.hqb.pplearn.web.controller;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +18,15 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import antlr.StringUtils;
+
 import com.hqb.pplearn.biz.form.UserForm;
+import com.hqb.pplearn.biz.model.User;
 import com.hqb.pplearn.biz.service.UserService;
 import com.hqb.pplearn.biz.validate.UserValidator;
 import com.hqb.pplearn.web.helper.WebHelper;
+
+import freemarker.template.utility.StringUtil;
 
 @Controller
 // @RequestMapping("/user")
@@ -57,5 +63,28 @@ public class UserController {
 			userService.createUser(form);
 			return "redirect:index.htm";
 		}
+	}
+	
+	@RequestMapping(value = "/loginPage.jhtm", method = RequestMethod.GET)
+	public String loginPage() {
+		logger.info("request registerPage.jhtm");
+		return "login";
+	}
+	
+	@RequestMapping(value = "/login.jhtm", method =RequestMethod.POST)
+	public String login(HttpServletRequest request, String userId, String password) {
+		logger.info("validating user loggin......");
+		String nextPage = "";
+		User loginUser = userService.findUserByEmail(userId);
+		if(loginUser != null && password.equals(loginUser.getPassword())) {
+			logger.info("User[" + loginUser.getEmail() + "] logged in.");
+			HttpSession session = request.getSession(true);
+			session.setAttribute("loginUser", loginUser);
+			nextPage = "matchPage";
+		} else {
+			logger.info("Invaid user id[" + loginUser.getEmail() + "]");
+			nextPage = "loginPage";
+		}
+		return nextPage;
 	}
 }
