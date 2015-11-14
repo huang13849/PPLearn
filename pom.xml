@@ -249,11 +249,13 @@
 			<artifactId>core</artifactId>
 			<version>2.3.0</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>it.sauronsoftware.jave</groupId>
 			<artifactId>jave</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>com.alibaba.druid</groupId>
 			<artifactId>druid-wrapper</artifactId>
