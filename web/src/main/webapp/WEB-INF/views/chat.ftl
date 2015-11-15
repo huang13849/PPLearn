@@ -11,6 +11,28 @@
         //强制使用localstorage存储用户标识
         //      window.FORCE_LOCAL_STORAGE = true
     </script>
+    <script type="text/javascript">            
+		var mengvalue = -1;
+            //if(mengvalue<0){mengvalue=0;}
+            var phoneWidth = parseInt(window.screen.width);
+            var phoneScale = phoneWidth / 640;
+
+            var ua = navigator.userAgent;
+            if (/Android (\d+\.\d+)/.test(ua)) {
+                var version = parseFloat(RegExp.$1);
+                // andriod 2.3
+                if (version > 2.3) {
+                    document.write('<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+                    // andriod 2.3以上
+                } else {
+                    document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+                }
+                // 其他系统
+            } else {
+              	document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+            }
+            
+	</script>
     <script src="http://res.websdk.rongcloud.cn/RongIMClient-0.9.10.min.js"></script>
     <link rel="stylesheet" href="assets/css/chat_style.css">
     </head>
@@ -19,11 +41,11 @@
 
 <div style="margin: 10px 10px">
     <div style="float:left;">Talking with :  ${toUser.nickName!}</div>    
-    <div style="float:right;"><button id="send">send</button></div>
+    <div style="float:right;margin-right:10px;"><button id="send">send</button></div>
     <input type="hidden" id="target" style="margin-right: 10px;" value="${toUser.id!}">
 </div>
 <div style="margin: 10px 10px">
-	<textarea id="content" type="text" style="margin:10px;width: 80%;height:100px;" row="10" ></textarea>
+	<textarea id="content" type="text" style="margin:10px;width: 40%;height:100px;" row="10" ></textarea>
 </div>
 
 <div id="convo" >  
