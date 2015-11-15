@@ -5,12 +5,10 @@
 		<script language="javascript"> 
 		function userVerify()
 		{
+			
 			var usrName = document.getElementById("form-userAccount").value;
-			obj s = usrName;
- 			var i=1; 
- 			alert(s);
+ 			
  	
-			} 
 		}
 		</script>		
     </head>
@@ -55,8 +53,8 @@
 			                        </div>
 			                        <dd><span>Verify code: 
 			                        	<label class="sr-only" for="userAccount">Verify code</label>
-  										<input name="vc" type="text" id="vc"   size="5" onblur="checkcode()" />  
-  											<img src="/assets/images/2907.jpg" style="cursor:pointer " onclick="changecode()" width="37" height="16" /></span><span class="reg1" id="sps5">Please type verify code</span><font id="mycode" style="display:none ">d</font> 
+  										<input name="vc" type="text" id="vc" placeholder="Code"  size="5" onblur="checkcode()" />  
+  											<img src="assets/img/2907.jpg" style="cursor:pointer " onclick="changecode()" width="37" height="16" /></span><span class="reg1" id="sps5"></span><font id="mycode" style="display:none ">d</font> 
 									</dd> 
 			                        <button type="submit" class="btn">Sign in!</button>
 			                    </form>
