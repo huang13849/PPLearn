@@ -44,6 +44,7 @@
 			                        </div>
 			                        <button type="submit" class="btn">Sign in!</button>
 			                    </form>
+			                    <div style="color:red">${errorMsg!}</div>
 		                    </div>
                         </div>
                     </div>
