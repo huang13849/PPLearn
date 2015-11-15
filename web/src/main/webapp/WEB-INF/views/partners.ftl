@@ -20,15 +20,17 @@
     		<#list users as u>
 				<div class="col-lg-4 col-sm-6 col-md-4>
 					<div class="preview">
-						<div class="image">
+						<div align ="center" class="image">
 							<a href="javascript:void(0);" target="_blank" rel="nofollow"
 								onclick="_gaq.push(['_trackEvent', 'Click', 'trbble']);"> 
-								<img 
+								<img height="160px" width="160px" 
 								src="${projContext}/${u.headImageUrl!}" class="img-responsive"
-								alt="" height="160px" width="160px">
+								alt="" >
 							</a>
 						</div>
+						
 						<div class="options">
+						
 							<div style="color:white"> ${u.nickName!}</div>
 							<div style="color:white"> ${u.introduce!}</div>
 							<div class="btn-group">
