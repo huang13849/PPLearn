@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.hqb.pplearn.biz.model.User;
 import com.hqb.pplearn.biz.service.RongCloudService;
 import com.hqb.pplearn.biz.service.UserService;
+import com.hqb.pplearn.web.helper.WebConstant;
 import com.hqb.pplearn.web.helper.WebHelper;
 
 @Controller
@@ -27,14 +28,14 @@ public class ChatController {
 
 	private final Logger logger = LoggerFactory.getLogger(ChatController.class);
 
-	@RequestMapping(value = "/chatPage.jhtm", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = WebConstant.CHAT_PAGE_JHTM, method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String chatPage(String toUserMail, Model model, HttpServletRequest request) {
 		logger.info("chatPage.jhtm");
 		User loginUser = WebHelper.getCurrentUserFromSession(request);
 		User toUser = userService.findUserByEmail(toUserMail);
 
 		if (loginUser == null) {
-			return "signIn";
+			return WebConstant.SIGN_IN_PAGE;
 		} else if (toUser == null) {
 			throw new RuntimeException("Cannot find the user by email: " + toUserMail);
 		} else {
@@ -47,6 +48,6 @@ public class ChatController {
 		}
 		model.addAttribute("token", token);
 		model.addAttribute("toUser", toUser);
-		return "chat";
+		return WebConstant.CHAT_PAGE;
 	}
 }
