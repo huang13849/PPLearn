@@ -68,7 +68,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = WebConstant.LOGIN_JHTM, method =RequestMethod.POST)
-	public String login(HttpServletRequest request, String userId, String password) {
+	public String login(HttpServletRequest request, String userId, String password, Model model) {
 		logger.info("validating user loggin......");
 		String nextPage = "";
 		User loginUser = userService.findUserByEmail(userId);
@@ -78,6 +78,7 @@ public class UserController {
 			nextPage = "redirect:" + WebConstant.PARTNERS_JHTM;
 		} else {
 			logger.info("Invaid user id[" + loginUser.getEmail() + "]");
+			model.addAttribute("errorMsg", "Invalid user id or password");
 			nextPage = WebConstant.SIGN_IN_PAGE;
 		}
 		return nextPage;
