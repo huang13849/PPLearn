@@ -32,7 +32,7 @@
 							<h3>${u.nickName!}</h3>
 							<p>${u.introduce!}</p>
 							<div class="btn-group">
-								<a class="btn btn-success" href="#"
+								<a class="btn btn-success" href="${projContext}/chatPage.jhtm?toUserMail=${u.email!}"
 									target="_blank" rel="nofollow"
 									onclick="_gaq.push(['_trackEvent', 'Click', 'trbble']);">Hi
 									&nbsp;&nbsp;<i class="fa fa-external-link"></i>
