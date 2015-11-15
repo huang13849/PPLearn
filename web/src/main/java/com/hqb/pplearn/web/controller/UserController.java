@@ -3,7 +3,6 @@ package com.hqb.pplearn.web.controller;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,19 +17,23 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import antlr.StringUtils;
-
 import com.hqb.pplearn.biz.form.UserForm;
 import com.hqb.pplearn.biz.model.User;
 import com.hqb.pplearn.biz.service.UserService;
 import com.hqb.pplearn.biz.validate.UserValidator;
 import com.hqb.pplearn.web.helper.WebHelper;
 
-import freemarker.template.utility.StringUtil;
-
 @Controller
 // @RequestMapping("/user")
 public class UserController {
+
+	private static final String REDIRECT_INDEX_HTM = "redirect:index.htm";
+
+	private static final String REGISTER_PAGE = "register";
+
+	private static final String PARTNER_MATCH_PAGE = "partnerMatch";
+
+	private static final String SIGN_IN_PAGE = "signIn";
 
 	@Autowired
 	private UserService userService;
@@ -50,7 +53,7 @@ public class UserController {
 	@RequestMapping(value = "/registerPage.jhtm", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String registerPage() {
 		logger.info("request registerPage.jhtm");
-		return "register";
+		return REGISTER_PAGE;
 	}
 
 	@RequestMapping(value = "/register.jhtm", method = RequestMethod.POST)
@@ -61,14 +64,14 @@ public class UserController {
 			throw new RuntimeException(errMsg);
 		} else {
 			userService.createUser(form);
-			return "redirect:index.htm";
+			return REDIRECT_INDEX_HTM;
 		}
 	}
 	
 	@RequestMapping(value = "/loginPage.jhtm", method = RequestMethod.GET)
 	public String loginPage() {
 		logger.info("request registerPage.jhtm");
-		return "signIn";
+		return SIGN_IN_PAGE;
 	}
 	
 	@RequestMapping(value = "/login.jhtm", method =RequestMethod.POST)
@@ -79,10 +82,11 @@ public class UserController {
 		if(loginUser != null && password.equals(loginUser.getPassword())) {
 			logger.info("User[" + loginUser.getEmail() + "] logged in.");
 			WebHelper.saveCurrentUserToSeesion(request, loginUser);
-			nextPage = "partnerMatch";
+			nextPage = PARTNER_MATCH_PAGE;
 		} else {
 			logger.info("Invaid user id[" + loginUser.getEmail() + "]");
-			nextPage = "signIn";
+			nextPage = SIGN_IN_PAGE;
 		}
 		return nextPage;
-	}}
+	}
+}
