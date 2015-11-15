@@ -23,12 +23,11 @@
     <input type="hidden" id="target" style="margin-right: 10px;" value="${toUser.id!}">
 </div>
 <div style="margin: 10px 10px">
-	<textarea id="content" type="text" style="margin:10px;width: 80%;height:100px;" row="10" value="1"></textarea>
+	<textarea id="content" type="text" style="margin:10px;width: 80%;height:100px;" row="10" ></textarea>
 </div>
 
 <div id="convo" >  
-<ul class="chat-thread" id="mydiv">
-	<li>Hi, nice to meet you?</li>	
+<ul class="chat-thread" id="mydiv">	
 </ul>
 </div>
 <div style="text-align:center;clear:both">
@@ -79,8 +78,7 @@
                 
             ins.sendMessage(con, to.value, RongIMClient.TextMessage.obtain(c.value || Date.now()), null, {
                 onSuccess: function () {
-                    console.log("send successfully");
-                    c.value = (c.value * 1 + 1);
+                    console.log("send successfully");                    
                 }, onError: function () {
                     console.log("send fail")
                 }
