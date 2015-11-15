@@ -12,27 +12,23 @@
         //      window.FORCE_LOCAL_STORAGE = true
     </script>
     <script src="http://res.websdk.rongcloud.cn/RongIMClient-0.9.10.min.js"></script>
-    <link rel="stylesheet" href="assets/css/chat_style.css">
     </head>
 <body>
 
-
+</body>
 <div style="margin: 10px 10px">
-    <div style="float:left;">Talking with :  ${toUser.nickName!}</div>    
-    <div style="float:right;"><button id="send">send</button></div>
-    <input type="hidden" id="target" style="margin-right: 10px;" value="${toUser.id!}">
+    content:<input id="content" type="text" style="width: 80%;" value="1">
 </div>
 <div style="margin: 10px 10px">
-	<textarea id="content" type="text" style="margin:10px;width: 80%;height:100px;" row="10" value="1"></textarea>
+    send to:<input type="hidden" id="target" style="margin-right: 50px" value="${toUser.id!}">
+    <button id="send">send</button>
 </div>
 
-<div id="convo" >  
-<ul class="chat-thread" id="mydiv">
-	<li>Hi, nice to meet you?</li>	
-</ul>
+<div id="mydiv" style="width: 100%;height: 200px;background-color: oldlace;overflow-y: auto">
+
 </div>
-<div style="text-align:center;clear:both">
 <div id="cons">
+
 </div>
 <script>
     window.onload = function () {
@@ -49,7 +45,7 @@
         var mydiv = document.getElementById("mydiv");
         RongIMClient.getInstance().setOnReceiveMessageListener({
             onReceived: function (data) {
-                var p = document.createElement("li");
+                var p = document.createElement("span");
                 p.style.marginRight = "10px";
                 p.innerHTML = data.getContent();
                 mydiv.appendChild(p);
@@ -70,13 +66,6 @@
         var c = document.getElementById("content"), to = document.getElementById("target"), s = document.getElementById("send"), t = document.getElementById("type");
         s.onclick = function () {
             var con = RongIMClient.ConversationType.setValue("4");
-            
-            var mydiv = document.getElementById("mydiv");
-            var p = document.createElement("li");
-            p.style.marginRight = "10px";
-            p.innerHTML = c.value;
-            mydiv.appendChild(p);
-                
             ins.sendMessage(con, to.value, RongIMClient.TextMessage.obtain(c.value || Date.now()), null, {
                 onSuccess: function () {
                     console.log("send successfully");
@@ -88,5 +77,4 @@
         }
     };    
 </script>
-</body>
 </html>
