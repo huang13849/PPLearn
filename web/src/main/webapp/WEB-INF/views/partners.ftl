@@ -40,9 +40,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
 				<#assign userCount=(userCount + 1)>
     		</#list>
+    		</div>
 			</div>
 			
 		</div>
