@@ -21,19 +21,12 @@ import com.hqb.pplearn.biz.form.UserForm;
 import com.hqb.pplearn.biz.model.User;
 import com.hqb.pplearn.biz.service.UserService;
 import com.hqb.pplearn.biz.validate.UserValidator;
+import com.hqb.pplearn.web.helper.WebConstant;
 import com.hqb.pplearn.web.helper.WebHelper;
 
 @Controller
 // @RequestMapping("/user")
 public class UserController {
-
-	private static final String REDIRECT_INDEX_HTM = "redirect:index.htm";
-
-	private static final String REGISTER_PAGE = "register";
-
-	private static final String PARTNER_MATCH_PAGE = "partnerMatch";
-
-	private static final String SIGN_IN_PAGE = "signIn";
 
 	@Autowired
 	private UserService userService;
@@ -50,13 +43,13 @@ public class UserController {
 		binder.setValidator(new UserValidator());
 	}
 
-	@RequestMapping(value = "/registerPage.jhtm", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = WebConstant.REGISTER_PAGE_JHTM, method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String registerPage() {
 		logger.info("request registerPage.jhtm");
-		return REGISTER_PAGE;
+		return WebConstant.REGISTER_PAGE;
 	}
 
-	@RequestMapping(value = "/register.jhtm", method = RequestMethod.POST)
+	@RequestMapping(value = WebConstant.REGISTER_JHTM, method = RequestMethod.POST)
 	public String register(@Validated UserForm form, Model model, HttpServletRequest request, BindingResult result) throws IllegalAccessException, InvocationTargetException {
 		logger.info("request register.jhtm");
 		if (result.hasErrors()) {
@@ -64,17 +57,17 @@ public class UserController {
 			throw new RuntimeException(errMsg);
 		} else {
 			userService.createUser(form);
-			return REDIRECT_INDEX_HTM;
+			return WebConstant.REDIRECT_INDEX_HTM;
 		}
 	}
 	
-	@RequestMapping(value = "/loginPage.jhtm", method = RequestMethod.GET)
+	@RequestMapping(value = WebConstant.LOGIN_PAGE_JHTM, method = RequestMethod.GET)
 	public String loginPage() {
 		logger.info("request registerPage.jhtm");
-		return SIGN_IN_PAGE;
+		return WebConstant.SIGN_IN_PAGE;
 	}
 	
-	@RequestMapping(value = "/login.jhtm", method =RequestMethod.POST)
+	@RequestMapping(value = WebConstant.LOGIN_JHTM, method =RequestMethod.POST)
 	public String login(HttpServletRequest request, String userId, String password) {
 		logger.info("validating user loggin......");
 		String nextPage = "";
@@ -82,10 +75,10 @@ public class UserController {
 		if(loginUser != null && password.equals(loginUser.getPassword())) {
 			logger.info("User[" + loginUser.getEmail() + "] logged in.");
 			WebHelper.saveCurrentUserToSeesion(request, loginUser);
-			nextPage = PARTNER_MATCH_PAGE;
+			nextPage = "redirect:" + WebConstant.PARTNERS_JHTM;
 		} else {
 			logger.info("Invaid user id[" + loginUser.getEmail() + "]");
-			nextPage = SIGN_IN_PAGE;
+			nextPage = WebConstant.SIGN_IN_PAGE;
 		}
 		return nextPage;
 	}
