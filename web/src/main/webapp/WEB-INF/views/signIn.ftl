@@ -2,6 +2,15 @@
 <html lang="en">
     <head>
 		<#include "/head.ftl">
+		<script language="javascript"> 
+		function userVerify()
+		{
+			
+			var usrName = document.getElementById("form-userAccount").value;
+ 			
+ 	
+		}
+		</script>		
     </head>
 
     <body>
@@ -16,7 +25,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-7 text">
-                            <h1><strong>PP Learn</strong> Welcome </h1>
+                            <h1>Welcome<strong>PP Learn</strong></h1>
                             <div class="description">
                          
                             </div>
@@ -36,12 +45,17 @@
 			                    <form role="form" action="login.jhtm" method="post" class="registration-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="userAccount">User Name</label>
-			                        	<input type="text" name="userId" placeholder="Pick a User Name..." class="form-control" id="form-userAccount">
+			                        	<input type="text" name="userId" placeholder="Enter Your User Name..." class="form-control" id="form-userAccount"  onblur="return userVerify()" >
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="password">Password</label>
-			                        	<input type="text" name="password" placeholder="Create a Password..." class="form-control" id="form-password">
+			                        	<input type="password" name="password" placeholder="Enter Your Password..." class="form-control" id="form-password">
 			                        </div>
+			                        <dd><span>Verify code: 
+			                        	<label class="sr-only" for="userAccount">Verify code</label>
+  										<input name="vc" type="text" id="vc" placeholder="Code"  size="5" onblur="checkcode()" />  
+  											<img src="assets/img/2907.jpg" style="cursor:pointer " onclick="changecode()" width="37" height="16" /></span><span class="reg1" id="sps5"></span><font id="mycode" style="display:none ">d</font> 
+									</dd> 
 			                        <button type="submit" class="btn">Sign in!</button>
 			                    </form>
 			                    <div style="color:red">${errorMsg!}</div>
@@ -51,6 +65,7 @@
                 </div>
             </div>            
         </div>
+
 
 		<#include "/js_resource.ftl">
     </body>
